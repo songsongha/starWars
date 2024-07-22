@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Box, Card, CardContent, CardMedia, Button, Typography } from '@mui/material'
+import { Card, CardContent, CardMedia, Button, Typography } from '@mui/material'
 import CharModal from './CharModal'
 
 // TODO: Needs to have an animation on hover

@@ -45,25 +45,23 @@ export function CharModal({
                     {name}
                 </Typography>
                 <Box sx={{ width: '100%' }}>
-                    <Typography id='modal-modal-description' sx={{ mt: 2 }}>
-                        <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-                            <Grid item xs={6}>
-                                Birthday:
-                            </Grid>
-                            <Grid item xs={6}>
-                                Height: {height}
-                            </Grid>
-                            <Grid item xs={6}>
-                                Mass: {mass}
-                            </Grid>
-                            <Grid item xs={6}>
-                                Date Added: {created}
-                            </Grid>
-                            <Grid item xs={6}>
-                                Number of Films: {numFilms}
-                            </Grid>
+                    <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+                        <Grid item xs={6}>
+                            Birthday:
                         </Grid>
-                    </Typography>
+                        <Grid item xs={6}>
+                            Height: {height}
+                        </Grid>
+                        <Grid item xs={6}>
+                            Mass: {mass}
+                        </Grid>
+                        <Grid item xs={6}>
+                            Date Added: {created}
+                        </Grid>
+                        <Grid item xs={6}>
+                            Number of Films: {numFilms}
+                        </Grid>
+                    </Grid>
                 </Box>
             </Box>
         </Modal>
