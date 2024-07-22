@@ -1,28 +1,30 @@
 import * as React from 'react'
 import { useQuery } from 'react-query'
 import { getUserList } from '../utils/api'
-import Card from '@mui/material/Card'
+
+import CharCard, { CardDataType } from '../components/CharCard'
 
 export function UserList() {
     const { data: users, error, isLoading } = useQuery('getUserList', getUserList)
 
     console.log({ users })
-    const cardData = React.useMemo(() => {
+    const cards: CardDataType = React.useMemo(() => {
         if (!users) return []
         const userArray = users.results
         // TODO: change any type
         return userArray.map((result: any) => {
-            const { name, birth_year, eye_color, gender, height } = result
-            return {
+            const { name, species, height, mass, created, films } = result
+            const cardData = {
                 name,
-                birth_year,
-                eye_color,
-                gender,
-                height: Number(result.height) / 100
+                species, // url
+                height: Number(height) / 100,
+                mass: Number(mass), // should be in kg
+                created,
+                numFilms: films.length
             }
+            return <CharCard data={cardData} />
         })
     }, [])
-    console.log({ cardData })
     if (isLoading) return <div> Fetching Users </div>
     if (error) {
         console.log({ error })
@@ -30,7 +32,8 @@ export function UserList() {
     }
     return (
         <>
-            <h1>Line-up User Profiles HELLO!</h1>
+            USERLIST
+            {cards}
         </>
     )
 }
