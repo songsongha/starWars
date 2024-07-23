@@ -1,17 +1,10 @@
 import * as React from 'react'
 import { Card, CardContent, CardMedia, Button, Typography } from '@mui/material'
 import CharModal from './CharModal'
+import { CardDataType } from '../views/UserList'
 
 // TODO: Needs to have an animation on hover
 
-export type CardDataType = {
-    name: string
-    species: string[] // url
-    height: number // should be in meters
-    mass: number // should be in kg
-    created: string
-    numFilms: number
-}
 export function CharCard({ data }: { data: CardDataType }) {
     const [showModal, setShowModal] = React.useState(false)
     const handleOpen = () => {

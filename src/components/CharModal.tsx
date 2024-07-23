@@ -1,21 +1,17 @@
 import { Box, Grid, Modal, Typography } from '@mui/material'
+import { useQuery } from 'react-query'
+import { getWorldData } from '../utils/api'
+import { titleCase } from '../utils/helpers'
+import { CardDataType } from '../views/UserList'
 
 // TODO: Needs to have an animation on hover
 
-type ModalDataType = {
-    name: string
-    species: string[] // url
-    height: number // should be in meters
-    mass: number // should be in kg
-    created: string
-    numFilms: number
-}
 export function CharModal({
     data,
     showModal,
     handleClose
 }: {
-    data: ModalDataType
+    data: CardDataType
     showModal: boolean
     handleClose: () => void
 }) {
@@ -31,7 +27,9 @@ export function CharModal({
         p: 4
     }
 
-    const { name, height, mass, created, numFilms } = data
+    const { name, height, mass, created, numFilms, world, birthYear } = data
+    const { data: worldData, error, isLoading } = useQuery(world, () => getWorldData(world))
+    console.log({ worldData })
 
     return (
         <Modal
@@ -41,25 +39,41 @@ export function CharModal({
             aria-describedby='modal-modal-description'
         >
             <Box sx={style}>
-                <Typography id='modal-modal-title' variant='h6' component='h2'>
+                <Typography id='modal-modal-title' variant='h5' component='h2'>
                     {name}
                 </Typography>
                 <Box sx={{ width: '100%' }}>
                     <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
                         <Grid item xs={6}>
-                            Birthday:
+                            Birth Year: {birthYear}
                         </Grid>
                         <Grid item xs={6}>
-                            Height: {height}
+                            Height: {height}m
                         </Grid>
                         <Grid item xs={6}>
-                            Mass: {mass}
+                            Mass: {mass}kg
                         </Grid>
                         <Grid item xs={6}>
                             Date Added: {created}
                         </Grid>
                         <Grid item xs={6}>
                             Number of Films: {numFilms}
+                        </Grid>
+                    </Grid>
+                </Box>
+                <Typography id='modal-modal-title' variant='body1' component='h2'>
+                    Home world: {worldData?.name}
+                </Typography>
+                <Box sx={{ width: '100%' }}>
+                    <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+                        <Grid item xs={6}>
+                            Terrain: {titleCase(worldData?.terrain)}
+                        </Grid>
+                        <Grid item xs={6}>
+                            Climate: {titleCase(worldData?.climate)}
+                        </Grid>
+                        <Grid item xs={6}>
+                            Number of Residents: {worldData?.residents.length}
                         </Grid>
                     </Grid>
                 </Box>

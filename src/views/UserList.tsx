@@ -1,8 +1,19 @@
 import * as React from 'react'
+import dayjs from 'dayjs'
 import { useQuery } from 'react-query'
 import { getUserList } from '../utils/api'
+import CharCard from '../components/CharCard'
 
-import CharCard, { CardDataType } from '../components/CharCard'
+export type CardDataType = {
+    name: string
+    species: string[] // url
+    height: number // should be in meters
+    mass: number // should be in kg
+    created: string
+    numFilms: number
+    world: string
+    birthYear: string
+}
 
 export function UserList() {
     const { data: users, error, isLoading } = useQuery('getUserList', getUserList)
@@ -14,16 +25,18 @@ export function UserList() {
 
         // TODO: change any type
         return userArray.map((result: any) => {
-            const { name, species, height, mass, created, films } = result
+            const { name, species, height, mass, created, films, homeworld, birth_year } = result
             const cardData = {
                 name,
                 species, // url
-                height: Number(height) / 100,
-                mass: Number(mass), // should be in kg
-                created,
-                numFilms: films.length
+                height: Number(height) / 100, // meters
+                mass: Number(mass), // kilograms
+                created: dayjs(created).format('DD-MM-YYYY'), // need to clarify date format, this assumes numerical format
+                numFilms: films.length,
+                world: homeworld,
+                birthYear: birth_year
             }
-            return <CharCard data={cardData} />
+            return <CharCard key={name} data={cardData} />
         })
     }, [users])
 
