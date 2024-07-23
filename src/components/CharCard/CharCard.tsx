@@ -3,6 +3,7 @@ import { Card, CardContent, CardMedia, Button } from '@mui/material'
 import CharModal from '../CharModal/CharModal'
 import { CardDataType } from '../../views/UserList'
 import './CharCard.css'
+import { colorArray } from '../../utils/helpers'
 
 // TODO: Needs to have an animation on hover
 
@@ -16,8 +17,17 @@ export function CharCard({ data }: { data: CardDataType }) {
     }
 
     console.log('cardData', data)
-    const { name } = data
-    console.log({ name })
+    const { name, species } = data
+
+    const backgroundColor = React.useMemo(() => {
+        let colorIndex = 0
+        if (species.length) {
+            const match = species[0].match(/\d+/) || [0]
+            colorIndex = Number(match[0])
+        }
+        return colorArray[colorIndex]
+    }, [species])
+
     const imgURL = React.useMemo(() => {
         const random = Math.floor(Math.random() * 300)
         return `https://picsum.photos/id/${random}/200`
@@ -25,11 +35,9 @@ export function CharCard({ data }: { data: CardDataType }) {
     return (
         <>
             <Button onClick={handleOpen}>
-                <Card className='card'>
+                <Card className='card' sx={{ backgroundColor }}>
                     <CardMedia className='image' image={imgURL} title={name} />
-                    <CardContent>
-                        <h1 className='name'>{name}</h1>
-                    </CardContent>
+                    <h1 className='name'>{name}</h1>
                 </Card>
             </Button>
             <CharModal data={data} showModal={showModal} handleClose={handleClose} />
