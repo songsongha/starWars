@@ -3,6 +3,7 @@ import dayjs from 'dayjs'
 import { useQuery } from 'react-query'
 import { getUserList } from '../utils/api'
 import CharCard from '../components/CharCard/CharCard'
+import { Pagination } from '@mui/material'
 
 export type CardDataType = {
     name: string
@@ -45,7 +46,12 @@ export function UserList() {
         console.log({ error })
         return <div> An error occured </div>
     }
-    return <>{cards}</>
+    return (
+        <>
+            <Pagination count={10} />
+            {cards}
+        </>
+    )
 }
 
 export default UserList

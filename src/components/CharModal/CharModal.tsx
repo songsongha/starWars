@@ -17,8 +17,7 @@ export function CharModal({
     handleClose: () => void
 }) {
     const { name, height, mass, created, numFilms, world, birthYear } = data
-    const { data: worldData, error, isLoading } = useQuery(world, () => getWorldData(world))
-    console.log({ worldData })
+    const { data: worldData } = useQuery(world, () => getWorldData(world))
 
     return (
         <Modal

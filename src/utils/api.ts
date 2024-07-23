@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 export const getUserList = async () => {
-    const response = await axios.get('https://swapi.dev/api/people?page=3')
+    const response = await axios.get('https://swapi.dev/api/people')
     return response.data
 }
 

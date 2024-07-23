@@ -16,7 +16,6 @@ export function CharCard({ data }: { data: CardDataType }) {
         setShowModal(false)
     }
 
-    console.log('cardData', data)
     const { name, species } = data
 
     const backgroundColor = React.useMemo(() => {
