@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Card, CardContent, CardMedia, Button, Typography } from '@mui/material'
+import { Card, CardContent, CardMedia, Button } from '@mui/material'
 import CharModal from '../CharModal/CharModal'
 import { CardDataType } from '../../views/UserList'
 import './CharCard.css'
@@ -28,9 +28,7 @@ export function CharCard({ data }: { data: CardDataType }) {
                 <Card className='card'>
                     <CardMedia className='image' image={imgURL} title={name} />
                     <CardContent>
-                        <Typography variant='h6' component='div'>
-                            {name}
-                        </Typography>
+                        <h1 className='name'>{name}</h1>
                     </CardContent>
                 </Card>
             </Button>
