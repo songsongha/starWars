@@ -40,6 +40,7 @@ export function UserList() {
         // TODO: change any type
         return userArray.map((result: any) => {
             const { name, species, height, mass, created, films, homeworld, birth_year } = result
+            console.log(name, mass)
             const cardData = {
                 name,
                 species, // url

@@ -39,7 +39,7 @@ export function CharModal({
                             Height: {height}m
                         </Grid>
                         <Grid item xs={6}>
-                            Mass: {mass}kg
+                            Mass: {isNaN(mass) ? 'Unknown' : `${mass}kg`}
                         </Grid>
                         <Grid item xs={6}>
                             Number of Films: {numFilms}
