@@ -2,7 +2,7 @@ import * as React from 'react'
 import dayjs from 'dayjs'
 import { useQuery } from 'react-query'
 import { getUserList } from '../utils/api'
-import CharCard from '../components/CharCard'
+import CharCard from '../components/CharCard/CharCard'
 
 export type CardDataType = {
     name: string

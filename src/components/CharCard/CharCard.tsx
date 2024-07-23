@@ -1,7 +1,8 @@
 import * as React from 'react'
 import { Card, CardContent, CardMedia, Button, Typography } from '@mui/material'
-import CharModal from './CharModal'
-import { CardDataType } from '../views/UserList'
+import CharModal from '../CharModal/CharModal'
+import { CardDataType } from '../../views/UserList'
+import './CharCard.css'
 
 // TODO: Needs to have an animation on hover
 
@@ -24,13 +25,13 @@ export function CharCard({ data }: { data: CardDataType }) {
     return (
         <>
             <Button onClick={handleOpen}>
-                <Card sx={{ width: 300 }}>
+                <Card className='card'>
+                    <CardMedia className='image' image={imgURL} title={name} />
                     <CardContent>
-                        <Typography gutterBottom variant='h5' component='div'>
+                        <Typography variant='h6' component='div'>
                             {name}
                         </Typography>
                     </CardContent>
-                    <CardMedia sx={{ height: 300 }} image={imgURL} title={name} />
                 </Card>
             </Button>
             <CharModal data={data} showModal={showModal} handleClose={handleClose} />
