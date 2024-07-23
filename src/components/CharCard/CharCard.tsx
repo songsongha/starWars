@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Card, CardContent, CardMedia, Button } from '@mui/material'
+import { Card, CardMedia, Button } from '@mui/material'
 import CharModal from '../CharModal/CharModal'
 import { CardDataType } from '../../views/UserList'
 import './CharCard.css'

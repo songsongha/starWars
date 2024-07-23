@@ -4,6 +4,7 @@ import { useQuery } from 'react-query'
 import { getUserList } from '../utils/api'
 import CharCard from '../components/CharCard/CharCard'
 import { Pagination } from '@mui/material'
+import SearchBar from '../components/SearchBar/SearchBar'
 
 export type CardDataType = {
     name: string
@@ -18,15 +19,19 @@ export type CardDataType = {
 
 export function UserList() {
     const [page, setPage] = React.useState(1)
+    const [search, setSearch] = React.useState('')
+
     const {
         data: users,
         error,
         isLoading
-    } = useQuery(['getUserList', page], () => getUserList(page), { keepPreviousData: true })
+    } = useQuery(['getUserList', `${search}:${page}`], () => getUserList(search, page), {
+        keepPreviousData: true
+    })
 
     console.log({ users })
 
-    const handleChange = React.useCallback((event: React.ChangeEvent<unknown>, value: number) => {
+    const handlePageChange = React.useCallback((event: React.ChangeEvent<unknown>, value: number) => {
         setPage(value)
     }, [])
 
@@ -34,6 +39,7 @@ export function UserList() {
         if (!users?.count) return 0
         return Math.ceil(users.count / 10)
     }, [users])
+
     const cards: CardDataType = React.useMemo(() => {
         if (!users) return []
         const userArray = users.results
@@ -62,7 +68,9 @@ export function UserList() {
     }
     return (
         <>
-            <Pagination count={numPages} onChange={handleChange} />
+            <h1>Star Wars Rolodex</h1>
+            <SearchBar setSearchQuery={setSearch} />
+            <Pagination count={numPages} onChange={handlePageChange} />
             {cards}
         </>
     )
