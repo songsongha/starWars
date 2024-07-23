@@ -5,8 +5,6 @@ import { titleCase } from '../../utils/helpers'
 import { CardDataType } from '../../views/UserList/UserList'
 import './CharModal.css'
 
-// TODO: Needs to have an animation on hover
-
 export function CharModal({
     data,
     showModal,
@@ -33,7 +31,7 @@ export function CharModal({
                 <Box sx={{ width: '100%', margin: '12px' }}>
                     <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
                         <Grid item xs={6}>
-                            Birth Year: {birthYear}
+                            Birth Year: {titleCase(birthYear)}
                         </Grid>
                         <Grid item xs={6}>
                             Height: {height}m
