@@ -17,13 +17,26 @@ export type CardDataType = {
 }
 
 export function UserList() {
-    const { data: users, error, isLoading } = useQuery('getUserList', getUserList)
+    const [page, setPage] = React.useState(1)
+    const {
+        data: users,
+        error,
+        isLoading
+    } = useQuery(['getUserList', page], () => getUserList(page), { keepPreviousData: true })
 
     console.log({ users })
+
+    const handleChange = React.useCallback((event: React.ChangeEvent<unknown>, value: number) => {
+        setPage(value)
+    }, [])
+
+    const numPages = React.useMemo(() => {
+        if (!users?.count) return 0
+        return Math.ceil(users.count / 10)
+    }, [users])
     const cards: CardDataType = React.useMemo(() => {
         if (!users) return []
         const userArray = users.results
-
         // TODO: change any type
         return userArray.map((result: any) => {
             const { name, species, height, mass, created, films, homeworld, birth_year } = result
@@ -48,7 +61,7 @@ export function UserList() {
     }
     return (
         <>
-            <Pagination count={10} />
+            <Pagination count={numPages} onChange={handleChange} />
             {cards}
         </>
     )
