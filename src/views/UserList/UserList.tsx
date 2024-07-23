@@ -1,10 +1,11 @@
 import * as React from 'react'
 import dayjs from 'dayjs'
 import { useQuery } from 'react-query'
-import { getUserList } from '../utils/api'
-import CharCard from '../components/CharCard/CharCard'
-import { Pagination } from '@mui/material'
-import SearchBar from '../components/SearchBar/SearchBar'
+import { getUserList } from '../../utils/api'
+import CharCard from '../../components/CharCard/CharCard'
+import { Box, Pagination } from '@mui/material'
+import SearchBar from '../../components/SearchBar/SearchBar'
+import './UserList.css'
 
 export type CardDataType = {
     name: string
@@ -32,6 +33,7 @@ export function UserList() {
     console.log({ users })
 
     const handlePageChange = React.useCallback((event: React.ChangeEvent<unknown>, value: number) => {
+        console.log({ value })
         setPage(value)
     }, [])
 
@@ -40,14 +42,20 @@ export function UserList() {
         return Math.ceil(users.count / 10)
     }, [users])
 
-    const cards: CardDataType = React.useMemo(() => {
-        if (!users) return []
+    const cards = React.useMemo(() => {
+        if (isLoading) return <Box className='error'> Fetching Users </Box>
+        if (error) {
+            console.log({ error })
+            return <Box className='error'> An error occured </Box>
+        }
+        if (!users?.results?.length) return <Box className='error'>No cards</Box>
+
         const userArray = users.results
         // TODO: change any type
         return userArray.map((result: any) => {
             const { name, species, height, mass, created, films, homeworld, birth_year } = result
             console.log(name, mass)
-            const cardData = {
+            const cardData: CardDataType = {
                 name,
                 species, // url
                 height: Number(height) / 100, // meters
@@ -61,16 +69,13 @@ export function UserList() {
         })
     }, [users])
 
-    if (isLoading) return <div> Fetching Users </div>
-    if (error) {
-        console.log({ error })
-        return <div> An error occured </div>
-    }
     return (
         <>
-            <h1>Star Wars Rolodex</h1>
-            <SearchBar setSearchQuery={setSearch} />
-            <Pagination count={numPages} onChange={handlePageChange} />
+            <Box className='header'>
+                <h1 className='title'>STAR WARS ROLODEX</h1>
+                <SearchBar setSearchQuery={setSearch} setPage={setPage} />
+                <Pagination count={numPages} onChange={handlePageChange} />
+            </Box>
             {cards}
         </>
     )

@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { Card, CardMedia, Button } from '@mui/material'
 import CharModal from '../CharModal/CharModal'
-import { CardDataType } from '../../views/UserList'
+import { CardDataType } from '../../views/UserList/UserList'
 import './CharCard.css'
 import { colorArray } from '../../utils/helpers'
 

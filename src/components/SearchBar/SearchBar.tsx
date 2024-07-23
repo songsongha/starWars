@@ -1,27 +1,37 @@
-import { InputAdornment, TextField } from '@mui/material'
+import { Box, InputAdornment, TextField } from '@mui/material'
 import { Search } from '@mui/icons-material'
 import { debounce } from 'lodash'
+import './SearchBar.css'
 
-export function SearchBar({ setSearchQuery }: { setSearchQuery: React.Dispatch<React.SetStateAction<string>> }) {
+export function SearchBar({
+    setSearchQuery,
+    setPage
+}: {
+    setSearchQuery: React.Dispatch<React.SetStateAction<string>>
+    setPage: React.Dispatch<React.SetStateAction<number>>
+}) {
     const handleSearch = debounce((e: React.ChangeEvent<HTMLInputElement>) => {
         console.log(e.target.value)
         setSearchQuery(e.target.value)
+        setPage(1)
     }, 300)
     return (
-        <TextField
-            label='Search by Name'
-            id='search'
-            placeholder='i.e. Darth Maul'
-            size='small'
-            InputProps={{
-                endAdornment: (
-                    <InputAdornment position='start'>
-                        <Search />
-                    </InputAdornment>
-                )
-            }}
-            onInput={handleSearch}
-        />
+        <Box className='search'>
+            <TextField
+                label='Search by Name'
+                id='search'
+                placeholder='i.e. Darth Maul'
+                size='small'
+                InputProps={{
+                    startAdornment: (
+                        <InputAdornment position='start'>
+                            <Search />
+                        </InputAdornment>
+                    )
+                }}
+                onInput={handleSearch}
+            />
+        </Box>
     )
 }
 

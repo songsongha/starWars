@@ -2,7 +2,7 @@ import { Box, Divider, Grid, Modal, Typography } from '@mui/material'
 import { useQuery } from 'react-query'
 import { getWorldData } from '../../utils/api'
 import { titleCase } from '../../utils/helpers'
-import { CardDataType } from '../../views/UserList'
+import { CardDataType } from '../../views/UserList/UserList'
 import './CharModal.css'
 
 // TODO: Needs to have an animation on hover
