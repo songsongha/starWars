@@ -24,7 +24,7 @@ export function CharCard({ data }: { data: CardDataType }) {
     return (
         <>
             <Button onClick={handleOpen}>
-                <Card sx={{ maxWidth: 345 }}>
+                <Card sx={{ width: 300 }}>
                     <CardContent>
                         <Typography gutterBottom variant='h5' component='div'>
                             {name}
