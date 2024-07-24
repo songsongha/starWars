@@ -30,10 +30,7 @@ export function UserList() {
         keepPreviousData: true
     })
 
-    console.log({ users })
-
     const handlePageChange = React.useCallback((event: React.ChangeEvent<unknown>, value: number) => {
-        console.log({ value })
         setPage(value)
     }, [])
 
@@ -45,16 +42,15 @@ export function UserList() {
     const cards = React.useMemo(() => {
         if (isLoading) return <Box className='error'> Fetching Users </Box>
         if (error) {
-            console.log({ error })
             return <Box className='error'> An error occured </Box>
         }
         if (!users?.results?.length) return <Box className='error'>No cards</Box>
 
         const userArray = users.results
-        // TODO: change any type
-        return userArray.map((result: any) => {
+
+        return userArray.map((result) => {
             const { name, species, height, mass, created, films, homeworld, birth_year } = result
-            console.log(name, mass)
+
             const cardData: CardDataType = {
                 name,
                 species, // url

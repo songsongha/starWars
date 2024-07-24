@@ -11,7 +11,6 @@ export function SearchBar({
     setPage: React.Dispatch<React.SetStateAction<number>>
 }) {
     const handleSearch = debounce((e: React.ChangeEvent<HTMLInputElement>) => {
-        console.log(e.target.value)
         setSearchQuery(e.target.value)
         setPage(1)
     }, 300)

@@ -2,10 +2,8 @@ import * as React from 'react'
 import { Card, CardMedia, Button } from '@mui/material'
 import CharModal from '../CharModal/CharModal'
 import { CardDataType } from '../../views/UserList/UserList'
-import './CharCard.css'
 import { colorArray } from '../../utils/helpers'
-
-// TODO: Needs to have an animation on hover
+import './CharCard.css'
 
 export function CharCard({ data }: { data: CardDataType }) {
     const [showModal, setShowModal] = React.useState(false)
