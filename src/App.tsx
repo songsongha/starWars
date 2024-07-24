@@ -1,11 +1,7 @@
 import UserList from './views/UserList/UserList'
 
 function App() {
-    return (
-        <>
-            <UserList />
-        </>
-    )
+    return <UserList />
 }
 
 export default App
