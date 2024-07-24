@@ -70,7 +70,7 @@ export function UserList() {
             <Box className='header'>
                 <h1 className='title'>STAR WARS ROLODEX</h1>
                 <SearchBar setSearchQuery={setSearch} setPage={setPage} />
-                <Pagination count={numPages} onChange={handlePageChange} />
+                <Pagination count={numPages} page={page} onChange={handlePageChange} />
             </Box>
             {cards}
         </>
