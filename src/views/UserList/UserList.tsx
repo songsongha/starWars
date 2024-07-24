@@ -30,7 +30,7 @@ export function UserList() {
         keepPreviousData: true
     })
 
-    const handlePageChange = React.useCallback((event: React.ChangeEvent<unknown>, value: number) => {
+    const handlePageChange = React.useCallback((_: React.ChangeEvent<unknown>, value: number) => {
         setPage(value)
     }, [])
 
