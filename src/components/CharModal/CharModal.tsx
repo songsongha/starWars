@@ -16,7 +16,7 @@ export function CharModal({
 }) {
     const { name, height, mass, created, numFilms, world, birthYear } = data
     const { data: worldData } = useQuery(world, () => getWorldData(world))
-
+    console.log({ worldData })
     return (
         <Modal
             open={showModal}

@@ -19,7 +19,7 @@ type PeopleResult = {
     vehicles: string[]
 }
 
-type UserListResponse = {
+type GetUserListResponse = {
     data: {
         count: number
         next: string | null
@@ -27,13 +27,31 @@ type UserListResponse = {
         results: PeopleResult[]
     }
 }
+
+type GetWorldDataResponse = {
+    data: {
+        climate: string
+        created: string
+        diameter: string
+        edited: string
+        films: string[]
+        gravity: string
+        name: string
+        orbital_period: string
+        population: string
+        residents: string[]
+        rotation_period: string
+        surface_water: string
+        terrain: string
+        url: string
+    }
+}
 export const getUserList = async (search: string, page: number) => {
-    const response: UserListResponse = await axios.get(`https://swapi.dev/api/people/?search=${search}&page=${page}`)
-    console.log({ response })
+    const response: GetUserListResponse = await axios.get(`https://swapi.dev/api/people/?search=${search}&page=${page}`)
     return response.data
 }
 
 export const getWorldData = async (url: string) => {
-    const response = await axios.get(url)
+    const response: GetWorldDataResponse = await axios.get(url)
     return response.data
 }

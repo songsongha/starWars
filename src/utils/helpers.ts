@@ -1,4 +1,4 @@
-export const titleCase = (str: string) => {
+export const titleCase = (str?: string) => {
     if (!str) return ''
     return str
         .split(' ')
